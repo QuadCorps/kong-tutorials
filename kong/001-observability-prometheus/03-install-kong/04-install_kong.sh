@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#set env vars
-source ./env
-
 #create secret for dataplane
 kubectl create ns kong
 kubectl create secret tls kong-cluster-cert -n kong --cert=./certs/tls.crt --key=./certs/tls.key --namespace kong

@@ -1,8 +1,11 @@
 #!/bin/sh
 
-source ../03-install-kong/env
+TOKEN=$1
+REGION=${2:-eu}
 
-SERVICE_ID=$1
+RESPONSE=$(bash ../03-install-kong/get-control-plane.sh $TOKEN $REGION)
+CONTROL_PLANE_ID=$(echo $RESPONSE | jq -r '.control_plane_id')
+SERVICE_ID=$(bash ./get-service.sh $TOKEN $REGION | jq -r '.service_id')
 
 echo '
 {
@@ -14,4 +17,4 @@ echo '
     "id": "'${SERVICE_ID}'"
   }
 
-}' | http https://${REGION}.api.konghq.com/v2/control-planes/${control_plane_id}/core-entities/routes "Authorization: Bearer ${TOKEN}"
+}' | http https://${REGION}.api.konghq.com/v2/control-planes/${CONTROL_PLANE_ID}/core-entities/routes "Authorization: Bearer ${TOKEN}"

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source ./env
+TOKEN=$1
+REGION=${2:-eu}
 
 echo '{
   "name": "Demo Control Plane",
