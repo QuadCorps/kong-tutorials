@@ -2,6 +2,8 @@
 ## How to Add Observability to Your Application With Prometheus
 This Tutorial shows how to configure metrics with Kong Konnect
 
+![Architecture Diagram](./assets/architecture.png)
+
 ## Pre-step
 The first thing you need is a Kong Konnect account so go ahead and register for one [here](https://cloud.konghq.com)
 
