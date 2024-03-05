@@ -241,3 +241,27 @@ control plane, run the cleanup script with the token
 cd ../00-cleanup
 bash cleanup.sh $TOKEN
 ```
+
+## Complete overrides
+The complete helm overrides created throughout the tutorial can be found in the
+folder `08-complete-helm-overrides`
+
+You still need to replace some variables within them but you can use them 
+as templates if you want to run this tutorial in one go instead of step by step
+
+Only assumptions with the below commands are:
+1. Your TLS certs are already generated
+If not you can generate them with
+```shell
+openssl req -new -x509 -nodes -newkey ec:<(openssl ecparam -name secp384r1) -keyout certs/tls.key -out certs/tls.crt -days 1095 -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com"
+```
+2. Your Kong Control plane is already created and TLS certs uploaded
+3. Your Slack app & webhook is already created
+
+```shell
+helm install prometheus prometheus-community/kube-prometheus-stack -f /08-complete-helm-overrides/prometheus.yaml -n monitoring --create-namespace
+
+kubectl create ns kong
+kubectl create secret tls kong-cluster-cert -n kong --cert=./certs/tls.crt --key=./certs/tls.key --namespace kong
+helm upgrade -i konnect-dp kong/kong -n kong -f ./08-complete-helm-overrides/kong.yaml
+```
