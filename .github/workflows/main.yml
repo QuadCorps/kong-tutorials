@@ -1,0 +1,10 @@
+name: Upload connector and sync documentation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: ../../../mulesoft/001-sync-extensions-docs/quadcorps-dummy-connector/.github/workflows/maven.yml
