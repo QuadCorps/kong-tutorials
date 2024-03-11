@@ -1,0 +1,19 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:quadcorps-dummy="http://www.mulesoft.org/schema/mule/quadcorps-dummy"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+          http://www.mulesoft.org/schema/mule/quadcorps-dummy http://www.mulesoft.org/schema/mule/quadcorps-dummy/current/mule-quadcorps-dummy.xsd">
+
+    <quadcorps-dummy:config name="config" configId="configId">
+        <quadcorps-dummy:connection requiredParameter="aValue" />
+    </quadcorps-dummy:config>
+
+    <flow name="sayHiFlow">
+        <quadcorps-dummy:say-hi person="Mariano Gonzalez"/>
+    </flow>
+
+    <flow name="retrieveInfoFlow">
+        <quadcorps-dummy:retrieve-info config-ref="config"/>
+    </flow>
+
+</mule>
